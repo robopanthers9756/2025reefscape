@@ -41,6 +41,7 @@ public class RobotContainer {
     final InputAxis m_fieldX = new InputAxis("Forward", joystick::getLeftY)
         .withDeadband(OIConstants.kMinDeadband)
         .withInvert(true)
+        // .withSlewRate(0.75,0.5) //This allows 75% speed increase per second or 50% speed decrease per second
         .withSquaring(true);
     final InputAxis m_fieldY = new InputAxis("Strafe", joystick::getLeftX)
         .withDeadband(OIConstants.kMinDeadband)
