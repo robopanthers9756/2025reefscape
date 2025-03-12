@@ -63,6 +63,9 @@ public class CoralSubsystem extends SubsystemBase {
   public void runMotor() {
     m_motor.set(0.25);
   }
+  public void reverseMotor() {
+    m_motor.set(-.25);
+  }
   public void stopMotor() {
     m_motor.set(0);
   }
