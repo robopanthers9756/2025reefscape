@@ -14,19 +14,19 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class MotorSubsystem extends SubsystemBase {
+public class ArmSubsystem extends SubsystemBase {
 
-  private static MotorSubsystem instance;
-  private SparkMax m_motor;
+  private static ArmSubsystem instance;
+  private SparkMax a_motor;
 
-  public static MotorSubsystem getInstance() {
+  public static ArmSubsystem getInstance() {
     if (instance == null)
-      instance = new MotorSubsystem();
+      instance = new ArmSubsystem();
     return instance;
   }
 
-  /** Creates a new MotorSubsystem. */
-  public MotorSubsystem() {
+  /** Creates a new ArmSubsystem. */
+  public ArmSubsystem() {
 
     init();
   }
@@ -38,8 +38,8 @@ public class MotorSubsystem extends SubsystemBase {
       .idleMode(IdleMode.kBrake)
       .inverted(false);
 
-      m_motor = new SparkMax(2, MotorType.kBrushless);
-      m_motor.configure(defaultConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+      a_motor = new SparkMax(2, MotorType.kBrushless);
+      a_motor.configure(defaultConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
 
   @Override
@@ -47,10 +47,13 @@ public class MotorSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void runMotor() {
-    m_motor.set(0.5);
+  public void runArm() {
+    a_motor.set(0.2);
   }
-  public void stopMotor() {
-    m_motor.set(0);
+  public void reverseArm() {
+    a_motor.set(-.2);
+  }
+  public void stopArm() {
+    a_motor.set(0);
   }
 }
