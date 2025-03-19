@@ -12,5 +12,6 @@ public class OIConstants {
     public static final int JoyProgID = 2; //ID of Programmer Joystick
     public static final double kMinDeadband = 0.02; //Deadband for analog joystick axis minimum
     public static final double kMaxDeadband = 0.98; //Deadband for analog joystick axis minimum
+    public static final double kTriggerButtonThreshold = 0.2; //amount to consider trigger buttons "pressed"
 }
 

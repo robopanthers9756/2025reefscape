@@ -19,6 +19,7 @@ import frc.robot.constants.OIConstants;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.CoralSubsystem;
+import frc.robot.subsystems.AlgaeSubsystem;
 
 //new motor subsystem
 import frc.robot.subsystems.MotorSubsystem;
@@ -27,6 +28,7 @@ import frc.robot.utils.InputAxis;
 
 public class RobotContainer {
     public CoralSubsystem coral = CoralSubsystem.getInstance();
+    public AlgaeSubsystem algae = new AlgaeSubsystem();
     public double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
     public double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
   
@@ -90,6 +92,18 @@ public class RobotContainer {
         operator.b()
         .onTrue(new InstantCommand(() -> coral.reverseMotor()))
         .onFalse(new InstantCommand(() -> coral.stopMotor()));
+
+    // Right Trigger -> Run ball intake, set to leave out when idle
+    driver
+        .rightTrigger(OIConstants.kTriggerButtonThreshold)
+        .whileTrue(algae.runIntakeCommand());
+
+    // Left Trigger -> Run ball intake in reverse, set to stow when idle
+    driver
+        .leftTrigger(OIConstants.kTriggerButtonThreshold)
+        .whileTrue(algae.reverseIntakeCommand());
+
+
 
         // Run SysId routines when holding back/start and X/Y.
         // Note that each routine should be run exactly once in a single log.
