@@ -22,19 +22,19 @@ import frc.robot.subsystems.CoralSubsystem;
 import frc.robot.subsystems.AlgaeSubsystem;
 
 //new motor subsystem
-import frc.robot.subsystems.ArmSubsystem;
+//import frc.robot.subsystems.ArmSubsystem;
 
 import frc.robot.utils.InputAxis;
 
 public class RobotContainer {
     public CoralSubsystem coral = CoralSubsystem.getInstance();
     public AlgaeSubsystem algae = new AlgaeSubsystem();
-    public ArmSubsystem arm = ArmSubsystem.getInstance();
+   // public ArmSubsystem arm = ArmSubsystem.getInstance();
     public double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
     public double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
   
   //new motor subsystem
-    public ArmSubsystem motor = ArmSubsystem.getInstance();
+    //public ArmSubsystem motor = ArmSubsystem.getInstance();
 
     /* Setting up bindings for necessary control of the swerve drive platform */
     public final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
@@ -93,12 +93,7 @@ public class RobotContainer {
         operator.b()
         .onTrue(new InstantCommand(() -> coral.reverseMotor()))
         .onFalse(new InstantCommand(() -> coral.stopMotor()));
-        operator.a()
-        .onTrue(new InstantCommand(() -> arm.runArm()))
-        .onFalse(new InstantCommand(() -> arm.stopArm()));
-        operator.y()
-        .onTrue(new InstantCommand(() -> arm.reverseArm()))
-        .onFalse(new InstantCommand(() -> arm.stopArm()));
+
 
     // Right Trigger -> Run ball intake, set to leave out when idle
     operator
