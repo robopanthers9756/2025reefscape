@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.sim.SparkFlexSim;
+import com.revrobotics.sim.SparkMaxSim;
 import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
@@ -49,7 +50,7 @@ public class AlgaeSubsystem extends SubsystemBase {
 
   // Simulation setup and variables
   private DCMotor armMotorModel = DCMotor.getNeoVortex(1);
-  private SparkFlexSim armMotorSim;
+  private SparkMaxSim armMotorSim;
   private final SingleJointedArmSim m_intakeSim =
       new SingleJointedArmSim(
           armMotorModel,
@@ -86,7 +87,7 @@ public class AlgaeSubsystem extends SubsystemBase {
 
   public AlgaeSubsystem() {
     /*
-     * Apply the configuration to the SPARKs.
+     * Apply the configuration to the SPARKs. 
      *
      * kResetSafeParameters is used to get the SPARK to a known state. This
      * is useful in case the SPARK is replaced.
@@ -111,7 +112,7 @@ public class AlgaeSubsystem extends SubsystemBase {
     armEncoder.setPosition(0);
 
     // Initialize Simulation values
-   // armMotorSim = new SparkFlexSim(armMotor, armMotorModel);
+     armMotorSim = new SparkMaxSim(armMotor, armMotorModel); 
     //armMotorSim = new SparkMaxSim(armMotor, armMotorModel);
   }
   
