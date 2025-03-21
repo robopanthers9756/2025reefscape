@@ -97,12 +97,12 @@ public class RobotContainer {
 
     // Right Trigger -> Run ball intake, set to leave out when idle
     operator
-        .rightTrigger(OIConstants.kTriggerButtonThreshold)
+        .rightBumper()
         .whileTrue(algae.runIntakeCommand());
 
     // Left Trigger -> Run ball intake in reverse, set to stow when idle
     operator
-        .leftTrigger(OIConstants.kTriggerButtonThreshold)
+        .leftBumper()
         .whileTrue(algae.reverseIntakeCommand());
 
 
