@@ -28,7 +28,7 @@ public class RevConfigs {
           .outputRange(-0.5, 0.5);
 
       // Configure basic settings of the intake motor
-      intakeConfig.inverted(true).idleMode(IdleMode.kBrake).smartCurrentLimit(40);
+      intakeConfig.inverted(false).idleMode(IdleMode.kBrake).smartCurrentLimit(40);
     }
   }
 
