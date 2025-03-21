@@ -1,8 +1,8 @@
 package frc.robot.constants;
 
 public class AlgaeConstants {
-  public static final int kIntakeMotorCanId = 13;
-  public static final int kPivotMotorCanId = 14;
+  public static final int kIntakeMotorCanId = 5;
+  public static final int kPivotMotorCanId = 4;
 
   public static final class ArmSetpoints {
     public static final double kStow = 18.5;

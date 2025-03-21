@@ -11,6 +11,7 @@ import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkFlex;
+import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.util.Units;
@@ -29,8 +30,11 @@ import frc.robot.constants.SimRobotConstants;
 public class AlgaeSubsystem extends SubsystemBase {
   // Initialize arm SPARK. We will use MAXMotion position control for the arm, so we also need to
   // initialize the closed loop controller and encoder.
-  private SparkFlex armMotor =
-      new SparkFlex(AlgaeConstants.kPivotMotorCanId, MotorType.kBrushless);
+
+  //private SparkFlex armMotor =
+  private SparkMax armMotor =
+    //new SparkFlex(AlgaeConstants.kPivotMotorCanId, MotorType.kBrushless);
+    new SparkMax(AlgaeConstants.kPivotMotorCanId, MotorType.kBrushless);
   private SparkClosedLoopController armController = armMotor.getClosedLoopController();
   private RelativeEncoder armEncoder = armMotor.getEncoder();
 
@@ -107,8 +111,10 @@ public class AlgaeSubsystem extends SubsystemBase {
     armEncoder.setPosition(0);
 
     // Initialize Simulation values
-    armMotorSim = new SparkFlexSim(armMotor, armMotorModel);
+   // armMotorSim = new SparkFlexSim(armMotor, armMotorModel);
+    //armMotorSim = new SparkMaxSim(armMotor, armMotorModel);
   }
+  
 
   /** Zero the arm encoder when the user button is pressed on the roboRIO */
   private void zeroOnUserButton() {

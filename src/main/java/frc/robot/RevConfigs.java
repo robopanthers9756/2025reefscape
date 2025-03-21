@@ -3,11 +3,13 @@ package frc.robot;
 import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkFlexConfig;
+import com.revrobotics.spark.config.SparkMaxConfig;
 
 public class RevConfigs {
   public static final class AlgaeSubsystem {
     public static final SparkFlexConfig intakeConfig = new SparkFlexConfig();
-    public static final SparkFlexConfig armConfig = new SparkFlexConfig();
+    //public static final SparkFlexConfig armConfig = new SparkFlexConfig();
+    public static final SparkMaxConfig armConfig = new SparkMaxConfig();
 
     static {
       // Configure basic setting of the arm motor
