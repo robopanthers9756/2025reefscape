@@ -67,7 +67,25 @@ public class RobotContainer {
 
 
     public RobotContainer() {
-        configureBindings();
+        // Configure the button bindings
+        configureButtonBindings();
+    }
+
+    private void configureButtonBindings() {
+        // Right bumper -> Run intake command, hold when released
+        operator.rightBumper()
+            .onTrue(algae.runIntakeCommand())
+            .onFalse(algae.holdCommand());
+
+        // Left bumper -> Run reverse intake command, hold when released
+        operator.leftBumper()
+            .onTrue(algae.runReverseIntakeCommand())
+            .onFalse(algae.holdCommand());
+
+        // Both bumpers pressed together -> Run stow command
+        operator.rightBumper()
+            .and(operator.leftBumper())
+            .whileTrue(algae.stowCommand());
     }
 
     private void configureBindings() {
@@ -98,12 +116,13 @@ public class RobotContainer {
     // Right Trigger -> Run ball intake, set to leave out when idle
     operator
         .rightBumper()
-        .whileTrue(algae.runIntakeCommand());
+        .onTrue(algae.runIntakeCommand())
+        .onFalse(algae.holdCommand());
 
     // Left Trigger -> Run ball intake in reverse, set to stow when idle
     operator
         .leftBumper()
-        .whileTrue(algae.reverseIntakeCommand());
+        .whileTrue(algae.runReverseIntakeCommand());
 
 
 
