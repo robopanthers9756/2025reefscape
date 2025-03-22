@@ -123,7 +123,7 @@ public class AlgaeSubsystem extends SubsystemBase {
       // Zero the encoder only when button switches from "unpressed" to "pressed" to prevent
       // constant zeroing while pressed
       wasReset = true;
-      armEncoder.setPosition(0);
+      armEncoder.setPosition(-35);
     } else if (!RobotController.getUserButton()) {
       wasReset = false;
     }
