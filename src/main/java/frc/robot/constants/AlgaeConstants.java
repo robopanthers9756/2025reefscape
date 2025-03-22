@@ -5,8 +5,8 @@ public class AlgaeConstants {
   public static final int kPivotMotorCanId = 4;
 
   public static final class ArmSetpoints {
-    public static final double kStow = -35;
-    public static final double kHold = -20;
+    public static final double kStow = -20;
+    public static final double kHold = -10;
     public static final double kDown = 0;
   } 
 

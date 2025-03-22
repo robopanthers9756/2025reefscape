@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismRoot2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RevConfigs;
 import frc.robot.constants.AlgaeConstants;
@@ -136,12 +137,7 @@ public class AlgaeSubsystem extends SubsystemBase {
    * <p>This will also update the idle state to hold onto the ball when this command is not running.
    */
   public Command runIntakeCommand() {
-    return this.run(
-        () -> {
-          stowWhenIdle = false;
-          setIntakePower(AlgaeConstants.IntakeSetpoints.kForward);
-          setIntakePosition(AlgaeConstants.ArmSetpoints.kDown);
-        });
+    return new InstantCommand(this::startIntake, this);
   }
 
   /**
@@ -150,21 +146,13 @@ public class AlgaeSubsystem extends SubsystemBase {
    *
    * <p>This will also update the idle state to stow the arm when this command is not running.
    */
-  public Command reverseIntakeCommand() {
-    return this.run(
-        () -> {
-          stowWhenIdle = true;
-          setIntakePower(AlgaeConstants.IntakeSetpoints.kReverse);
-          setIntakePosition(AlgaeConstants.ArmSetpoints.kHold);
-        });
+  public Command runReverseIntakeCommand() {
+    return new InstantCommand(this::startReverseIntake, this);
   }
 
   /** Command to force the subsystem into its "stow" state. */
   public Command stowCommand() {
-    return this.runOnce(
-        () -> {
-          stowWhenIdle = true;
-        });
+    return new InstantCommand(this::stow, this);
   }
 
   /**
@@ -173,17 +161,24 @@ public class AlgaeSubsystem extends SubsystemBase {
    * When in the "stow" state, the intake will stow the arm in the "stow" position and stop the
    * motor.
    */
-  public Command idleCommand() {
-    return this.run(
-        () -> {
-          if (stowWhenIdle) {
-            setIntakePower(0.0);
-            setIntakePosition(AlgaeConstants.ArmSetpoints.kStow);
-          } else {
-            setIntakePower(AlgaeConstants.IntakeSetpoints.kHold);
-            setIntakePosition(AlgaeConstants.ArmSetpoints.kHold);
-          }
-        });
+  public Command holdCommand() {
+    return new InstantCommand(this::hold, this);
+  }
+
+  private void startIntake() {
+    // Code to start the intake
+  }
+
+  private void startReverseIntake() {
+    // Code to start the reverse intake
+  }
+
+  private void hold() {
+    // Code to hold the intake
+  }
+
+  private void stow() {
+    // Code to stow the intake
   }
 
   /** Set the intake motor power in the range of [-1, 1]. */
