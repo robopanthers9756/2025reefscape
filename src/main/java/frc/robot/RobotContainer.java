@@ -113,13 +113,13 @@ public class RobotContainer {
         .onFalse(new InstantCommand(() -> coral.stopMotor()));
 
 
-    // Right Trigger -> Run ball intake, set to leave out when idle
+    // Right Bumper -> Run ball intake, set to leave out when idle
     operator
         .rightBumper()
         .onTrue(algae.runIntakeCommand())
         .onFalse(algae.holdCommand());
 
-    // Left Trigger -> Run ball intake in reverse, set to stow when idle
+    // Left Bumper -> Run ball intake in reverse, set to stow when idle
     operator
         .leftBumper()
         .whileTrue(algae.runReverseIntakeCommand());
