@@ -1,5 +1,8 @@
 package frc.robot.subsystems;
 
+//Sometimes it is useful to comment out the following to see what variables or what controller buttons are not assigned yet
+//@SuppressWarnings("unused") //We silence the "unused variables" warnings in VSCode
+
 import static edu.wpi.first.units.Units.*;
 
 import java.util.function.Supplier;
@@ -62,6 +65,9 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
         )
     );
 
+    //Sometimes it is useful to comment out the following to see what variables or what controller buttons are not assigned yet
+    @SuppressWarnings("unused") //We silence the "unused variables" warnings in VSCode
+
     /* SysId routine for characterizing steer. This is used to find PID gains for the steer motors. */
     private final SysIdRoutine m_sysIdRoutineSteer = new SysIdRoutine(
         new SysIdRoutine.Config(
@@ -83,6 +89,9 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
      * This is used to find PID gains for the FieldCentricFacingAngle HeadingController.
      * See the documentation of SwerveRequest.SysIdSwerveRotation for info on importing the log to SysId.
      */
+
+@SuppressWarnings("unused")
+
     private final SysIdRoutine m_sysIdRoutineRotation = new SysIdRoutine(
         new SysIdRoutine.Config(
             /* This is in radians per second², but SysId only supports "volts per second" */
