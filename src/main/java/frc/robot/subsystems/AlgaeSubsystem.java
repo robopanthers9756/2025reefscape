@@ -45,7 +45,7 @@ public class AlgaeSubsystem extends SubsystemBase {
       new SparkFlex(AlgaeConstants.kIntakeMotorCanId, MotorType.kBrushless);
 
   // Member variables for subsystem state management
-  private boolean stowWhenIdle = true;
+  //private boolean stowWhenIdle = true;
   private boolean wasReset = false;
 
   // Simulation setup and variables
@@ -138,9 +138,16 @@ public class AlgaeSubsystem extends SubsystemBase {
   public Command runIntakeCommand() {
     return this.run(
         () -> {
-          stowWhenIdle = false;
           setIntakePower(AlgaeConstants.IntakeSetpoints.kForward);
           setIntakePosition(AlgaeConstants.ArmSetpoints.kDown);
+        });
+  }
+
+  public Command holdCommand() {
+    return this.run(
+        () -> {
+          setIntakePower(AlgaeConstants.IntakeSetpoints.kHold);
+          setIntakePosition(AlgaeConstants.ArmSetpoints.kHold);
         });
   }
 
@@ -150,12 +157,11 @@ public class AlgaeSubsystem extends SubsystemBase {
    *
    * <p>This will also update the idle state to stow the arm when this command is not running.
    */
-  public Command reverseIntakeCommand() {
+  public Command feedAlgaeCommand() {
     return this.run(
         () -> {
-          stowWhenIdle = true;
           setIntakePower(AlgaeConstants.IntakeSetpoints.kReverse);
-          setIntakePosition(AlgaeConstants.ArmSetpoints.kHold);
+          setIntakePosition(AlgaeConstants.ArmSetpoints.kFeed);
         });
   }
 
@@ -163,26 +169,8 @@ public class AlgaeSubsystem extends SubsystemBase {
   public Command stowCommand() {
     return this.runOnce(
         () -> {
-          stowWhenIdle = true;
-        });
-  }
-
-  /**
-   * Command to run when the intake is not actively running. When in the "hold" state, the intake
-   * will stay in the "hold" position and run the motor at its "hold" power to hold onto the ball.
-   * When in the "stow" state, the intake will stow the arm in the "stow" position and stop the
-   * motor.
-   */
-  public Command idleCommand() {
-    return this.run(
-        () -> {
-          if (stowWhenIdle) {
-            setIntakePower(0.0);
-            setIntakePosition(AlgaeConstants.ArmSetpoints.kStow);
-          } else {
-            setIntakePower(AlgaeConstants.IntakeSetpoints.kHold);
-            setIntakePosition(AlgaeConstants.ArmSetpoints.kHold);
-          }
+          setIntakePower(0.0);
+          setIntakePosition(AlgaeConstants.ArmSetpoints.kStow);
         });
   }
 

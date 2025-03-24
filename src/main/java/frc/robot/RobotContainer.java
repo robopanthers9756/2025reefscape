@@ -87,10 +87,10 @@ public class RobotContainer {
             point.withModuleDirection(new Rotation2d(-driver.getLeftY(), -driver.getLeftX()))
         ));
 
-        operator.x()
+        operator.b()
         .onTrue(new InstantCommand(() -> coral.runMotor()))
         .onFalse(new InstantCommand(() -> coral.stopMotor()));
-        operator.b()
+        operator.a()
         .onTrue(new InstantCommand(() -> coral.reverseMotor()))
         .onFalse(new InstantCommand(() -> coral.stopMotor()));
 
@@ -98,22 +98,22 @@ public class RobotContainer {
     // Right Bumper -> Run ball intake, set to leave out when idle
     operator
         .rightBumper()
-        .whileTrue(algae.runIntakeCommand()
-        .andThen(algae.idleCommand()));
+        .onTrue(algae.runIntakeCommand()
+        .andThen(algae.holdCommand()));
 
     // Left Bumper -> Run ball intake in reverse, set to stow when idle
     operator
         .leftBumper()
-        .whileTrue(algae.reverseIntakeCommand()
-        .andThen(algae.idleCommand()));
+        .whileTrue(algae.holdCommand()
+        .andThen(algae.stowCommand()));
 
     // Right Trigger and Left Trigger -> Force the intake to stow
     operator
-        .rightTrigger()
-        .and(operator.leftTrigger())
-        .onTrue(new InstantCommand(() -> algae.stowCommand()));
+        .x()
+        .onTrue(algae.stowCommand());
 
-
+    operator.y()
+        .onTrue(algae.feedAlgaeCommand());
 
         // Run SysId routines when holding back/start and X/Y.
         // Note that each routine should be run exactly once in a single log.

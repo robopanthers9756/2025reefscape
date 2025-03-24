@@ -6,8 +6,9 @@ public class AlgaeConstants {
 
   public static final class ArmSetpoints {
     public static final double kStow = 0;
-    public static final double kHold = 10;
-    public static final double kDown = 20;
+    public static final double kHold = 3;
+    public static final double kDown = 17;
+    public static final double kFeed = 10;
   } 
 
   public static final class IntakeSetpoints {
