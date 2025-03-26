@@ -49,7 +49,7 @@ public class Robot extends TimedRobot {
               .withRotationalRate(0.0 * m_robotContainer.MaxAngularRate) // Drive counterclockwise with negative X (left)
       ).withTimeout(1);
 
-      Command waitCommand = new WaitCommand(2.0);
+      Command waitCommand = new WaitCommand(1.50);
 
       Command stopCommand = m_robotContainer.drivetrain.applyRequest(() ->
       m_robotContainer.drive.withVelocityX(0.0) // Drive forward with negative Y (forward)
